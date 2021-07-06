@@ -35,12 +35,15 @@ with open(budget_csv, 'r') as csvfile:
         MinProfitMonth = month_list[index_min+1]
 
 
-    print("Financial Analysis")
-    print("---------------------------")
-    print("Total months: " + str(month_counter))
-    print("Total: " + str(total))
-    print("Average Change: " + "$" + str(avg_difference))    
-    print("Greatest Increase In Profits: " + str(MaxProfitMonth) + " ($" +
-    str(max_profit) + ")")
-    print("Greatest Decrease In Profits: " + str(MinProfitMonth) + " ($" +
-    str(min_profit) + ")")
+    TitleResult = "Financial Analysis \n--------------------------"
+    TotalMonthResult = "\n Total months: " + str(month_counter)
+    TotalResult = "\n Total: " + str(total)
+    AvgChangeResult = "\n Average Change: " + "$" + str(avg_difference)   
+    GrtIncResult = "\n Greatest Increase In Profits: " + str(MaxProfitMonth) + " ($" + str(max_profit) + ")"
+    GrtDecResult = "\n Greatest Decrease In Profits: " + str(MinProfitMonth) + " ($" + str(min_profit) + ")"
+    ResultPrint = TitleResult + TotalMonthResult + TotalResult + AvgChangeResult + GrtIncResult + GrtDecResult
+
+txt_output = os.path.join(".", "Analysis", "ResultPyBank.txt")
+with open(txt_output, 'w') as textfile:
+    textfile.write(ResultPrint)
+    print(ResultPrint)
