@@ -1,5 +1,5 @@
-"""This python script reads lection_data.csv and finds the names of candidates, stores them in a list
-and counts their votes, thus finds the winner. The results are output as ResultPyPoll1.txt """
+"""This python script reads election_data.csv and finds the names of candidates, stores them in a list
+and counts their votes, thus finds the winner. The results are output as ResultPyPoll.txt """
 
 import os
 import csv
@@ -49,7 +49,7 @@ with open(poll_csv, 'r') as csvfile:
     KhanVotes = "\nKhan: " + str(round(my_dict['Khan']/total_poll * 100,3)) + "% " + "(" + str(my_dict['Khan']) + ")"
     CorreyVotes = "\nCorrey: " + str(round(my_dict['Correy']/total_poll * 100,3)) + "% " + "(" + str(my_dict['Correy']) + ")"
     LiVotes = "\nLi: " + str(round(my_dict['Li']/total_poll * 100,3)) + "% " + "(" + str(my_dict['Li']) + ")"
-    OTooleyVotes = "\nCorrey: " + str(round(my_dict["O'Tooley"]/total_poll * 100,3)) + "% " + "(" + str(my_dict["O'Tooley"]) + ")" + "\n--------------------------"
+    OTooleyVotes = "\nO'Tooley: " + str(round(my_dict["O'Tooley"]/total_poll * 100,3)) + "% " + "(" + str(my_dict["O'Tooley"]) + ")" + "\n--------------------------"
     Winner = "\nWinner: " + str(winner_name) + "\n--------------------------"
 
     ResultPrint = TitleResult + TotalVotes + KhanVotes + CorreyVotes + LiVotes + OTooleyVotes + Winner
