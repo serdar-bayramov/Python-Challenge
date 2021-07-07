@@ -5,14 +5,11 @@ import operator
 #add path for budget_data.csv file
 poll_csv = os.path.join('.', 'Resources', 'election_data.csv')
 
-#open csv.file in read mode"""
+#open csv.file in read mode
 
 with open(poll_csv, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     header = next(csvreader)
-   
-    #polls = list(csvreader)
-    #poll_count = len(polls)
 
     list_VoterID = []
     list_County = []
