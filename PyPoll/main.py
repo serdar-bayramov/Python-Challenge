@@ -1,5 +1,6 @@
 import os
 import csv
+import operator
 
 #add path for budget_data.csv file
 poll_csv = os.path.join('.', 'Resources', 'election_data.csv')
@@ -16,6 +17,7 @@ with open(poll_csv, 'r') as csvfile:
     list_VoterID = []
     list_County = []
     list_Candidate = []
+    winner = {}
 
     for row in csvreader:
         list_VoterID.append(row[0])
@@ -45,25 +47,34 @@ with open(poll_csv, 'r') as csvfile:
     for cand in list_Candidate:
         if cand == "O'Tooley":
             counter4 = counter4 + 1
-    OTooley = counter4
-    print(Khan_poll, Correy_poll, Li_poll, OTooley)
+    OTooley_poll = counter4
 
 
+    total_poll = Khan_poll + Correy_poll + Li_poll + OTooley_poll
+
+    Khan_percentage = round(int(Khan_poll)/int(total_poll) * 100,3)
+    Correy_percentage = round(int(Correy_poll)/int(total_poll) * 100,3)
+    Li_percentage = round(int(Li_poll)/int(total_poll) * 100,3)
+    OTooley_percentage = round(int(OTooley_poll)/int(total_poll) * 100,3)
+    
+    winner["Khan"]=Khan_poll
+    winner["Correy"]=Correy_poll
+    winner["Li"]=Li_poll
+    winner["O'Tooley"] = OTooley_poll
+    winner_poll = max(winner.items(), key=operator.itemgetter(1))[0]
     
 
+    TitleResult = "Election Results \n--------------------------"
+    TotalVotes = "\nTotal votes: " + str(total_poll) + "\n--------------------------"
+    KhanVotes = "\nKhan: " + str(Khan_percentage) + "% " + "(" + str(Khan_poll) + ")"
+    CorreyVotes = "\nCorrey: " + str(Correy_percentage) + "% " + "(" + str(Correy_poll) + ")"
+    LiVotes = "\nLi: " + str(Li_percentage) + "% " + "(" + str(Li_poll) + ")"
+    OTooleyVotes = "\nO'Tooley: " + str(OTooley_percentage) + "% " + "(" + str(OTooley_poll) + ")" + "\n--------------------------"
+    Winner = "\nWinner: " + str(winner_poll) + "\n--------------------------"
 
-    #counter = 0
-    #for row in csvreader:
-    
-        #if row[2] == "Khan":
-            #print(len(row[0]))
+    ResultPrint = TitleResult + TotalVotes + KhanVotes + CorreyVotes + LiVotes + OTooleyVotes + Winner
 
-
-        
-        
-
-
-
-    #TitleResult = "Election Results \n--------------------------"
-    #TotalVotes = "\nTotal votes: " + str(poll_count) + "\n--------------------------"
-    #print(TitleResult,TotalVotes)
+txt_output = os.path.join(".", "Analysis", "ResultPyPoll.txt")
+with open(txt_output, 'w') as textfile:
+    textfile.write(ResultPrint)
+    print(ResultPrint)
