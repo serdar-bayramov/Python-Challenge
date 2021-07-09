@@ -3,8 +3,7 @@ and counts their votes, thus finds the winner. The results are output as ResultP
 
 import os
 import csv
-import operator
-import numpy as np 
+from collections import Counter
 
 #add path for budget_data.csv file
 poll_csv = os.path.join('.', 'Resources', 'election_data.csv')
@@ -23,14 +22,10 @@ with open(poll_csv, 'r') as csvfile:
     for row in csvreader:
         my_list.append(row[2])
 
-# using the following line of code we can find the unique values in a list and sums its values
-# this way we double check if there are other names that exist in the csv file
-    result = list(zip(*np.unique(my_list, return_counts=True)))
+#find unique values in the list and save in dictionary
+    my_dict = dict(Counter(my_list).items())
 
-#move results to dictionary as a value
-    my_dict = dict(result)
     total_poll = len(my_list)
-    
     max_value = 0
     max_key = None
 
